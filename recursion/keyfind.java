@@ -1,4 +1,4 @@
-package recursion;
+package patterntwo.recursion;
 
 public class keyfind {
     public static void findarr(int[] arr, int key, int n){
