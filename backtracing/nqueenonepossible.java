@@ -1,18 +1,22 @@
 package backtracing;
 
-public class nqueen {
-    public static void nQueens(char board[][],int row){
+public class nqueenonepossible {
+    public static boolean nQueens(char board[][],int row){
         if(row==board.length){
             printboard(board);
             count+=1;
+            return true;
         }
         for (int j = 0; j < board.length; j++) {
             if(isSafe(board,row,j)){
                  board[row][j]='Q'; //after placing a queen in a place 
-                nQueens(board, row+1);//we are calling the recursive function
+                if(nQueens(board, row+1)){
+                    return true;
+                }//we are calling the recursive function
                 board[row][j]='X';//now remove the queen from the previous position backtrack
             }
         }
+        return false;
     }
     public static boolean isSafe(char board[][],int row,int col){ //we keep checking up because we place the queens down to up
         //vertical up
@@ -46,7 +50,7 @@ public class nqueen {
     }
     static int count=0; 
     public static void main(String[] args) {
-        int n=5;
+        int n=2;
         char board[][]=new char[n][n];
         //initialise
         for (int i = 0; i < n; i++) {
@@ -54,7 +58,11 @@ public class nqueen {
                 board[i][j]='X';
             }
         }
-        nQueens(board,0);
-        System.out.println("The number of possible ways- "+count);
+        if(nQueens(board,0)){
+            System.out.print("solution is possible");
+        }else{
+            System.out.print("solution is not possible");
+        }
+        //System.out.println("The number of possible ways- "+count);
     }
 }
